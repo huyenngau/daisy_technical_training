@@ -27,57 +27,53 @@ The list of numbers should be print out one per line in lexicographic order with
 
 
 def call_numbers(call_list):
-    incoming_call_numbers = []
-    receiving_call_numbers = []
+    set_of_caller_numbers = set()
+    set_of_receiver_numbers = set()
     for call in call_list:
-        if call[0] not in incoming_call_numbers:
-            incoming_call_numbers.append(call[0])
-        if call[1] not in receiving_call_numbers:
-            receiving_call_numbers.append(call[1])
-    return incoming_call_numbers, receiving_call_numbers
+        set_of_caller_numbers.add(call[0])
+        set_of_receiver_numbers.add(call[1])
+    return set_of_caller_numbers, set_of_receiver_numbers
 
 
 def text_numbers(text_list):
-    sending_text_numbers = []
-    receiving_text_numbers = []
+    set_of_sender_text_numbers = set()
+    set_of_receiver_text_numbers = set()
     for text in text_list:
-        if text[0] not in sending_text_numbers:
-            sending_text_numbers.append(text[0])
-        if text[1] not in receiving_text_numbers:
-            receiving_text_numbers.append(text[1])
-    return sending_text_numbers, receiving_text_numbers
+        set_of_sender_text_numbers.add(text[0])
+        set_of_receiver_text_numbers.add(text[1])
+    return set_of_sender_text_numbers, set_of_receiver_text_numbers
 
 
-def list_of_telemarketers_number(call_list, text_list):
-    list_of_numbers = []
+def get_telemarketer_numbers(call_list, text_list):
+    telemarketer_numbers = set()
 
-    incoming_call_numbers, receiving_call_numbers = call_numbers(call_list)
-    sending_text_numbers, receiving_text_numbers = text_numbers(text_list)
+    set_of_caller_numbers, set_of_receiver_numbers = call_numbers(call_list)
+    set_of_sender_text_numbers, set_of_receiver_text_numbers = text_numbers(text_list)
 
-    for telephone_number in incoming_call_numbers:
-        if telephone_number not in receiving_call_numbers and telephone_number not in sending_text_numbers and telephone_number not in receiving_text_numbers and telephone_number not in list_of_numbers:
-            list_of_numbers.append(telephone_number)
+    for telephone_number in set_of_caller_numbers:
+        if telephone_number not in set_of_receiver_numbers \
+           and telephone_number not in set_of_sender_text_numbers \
+           and telephone_number not in set_of_receiver_text_numbers:
+            telemarketer_numbers.add(telephone_number)
 
-    return list_of_numbers
+    return telemarketer_numbers
 
 
 def demo():
-    list_of_numbers = sorted(list_of_telemarketers_number(calls, texts))
+    telemarketer_numbers = sorted(get_telemarketer_numbers(calls, texts))
     print("These numbers could be telemarketers:")
-    for number in list_of_numbers:
-        print(number)
+    for telephone_number in telemarketer_numbers:
+        print(telephone_number)
 
 
 demo()
 
-
 # Calculate Big O:
-# call_numbers() => O(n * (a + b) + 1)
-# text_numbers() => O(n * (c + d) + 1)
-# for telephone_number in incoming_call_numbers => O (a)
-# check telephone_number => O(b + c + d + k)
-# append => O(1)
-# print => O (k)
-# total: O(n * (a + b + c + d) + a * (b + c + d + k) + k + 1)
-# O(n * m + q * p + k)
-
+# call_numbers() => O(n)
+# text_numbers() => O(n)
+# for telephone_number in set_of_caller_numbers => O (n)
+# check telephone_number is in telemarketer_numbers => O(n)
+# add => O(1)
+# sorted => O(n * log n)
+# print => O(n)
+# total: O(n * (n^2 + n * log n + 1))

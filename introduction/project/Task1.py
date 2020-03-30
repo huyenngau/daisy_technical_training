@@ -19,24 +19,23 @@ Print a message:
 """
 
 
-def different_telephone_numbers(input_list):
-    different_list = []
-    for element in input_list:
-        if element not in different_list:
-            different_list.append(element)
-    return len(different_list)
+def different_numbers(list_of_numbers):
+    set_of_different_numbers = set()
+    for element in list_of_numbers:
+        set_of_different_numbers.add(element)
+    return len(set_of_different_numbers)
 
 
 def demo():
     total_telephone_numbers = []
-    for i in range(len(calls)):
-        total_telephone_numbers.append(calls[i][0])
-        total_telephone_numbers.append(calls[i][1])
-    for i in range(len(texts)):
-        total_telephone_numbers.append(texts[i][0])
-        total_telephone_numbers.append(texts[i][1])
-    count = different_telephone_numbers(total_telephone_numbers)
-    print("There are {} different telephone numbers in the records.".format(count))
+    for call in calls:
+        total_telephone_numbers.append(call[0])
+        total_telephone_numbers.append(call[1])
+    for text in texts:
+        total_telephone_numbers.append(text[0])
+        total_telephone_numbers.append(text[1])
+    list_of_different_telephone_numbers = different_numbers(total_telephone_numbers)
+    print("There are {} different telephone numbers in the records.".format(list_of_different_telephone_numbers))
 
 
 demo()
@@ -44,7 +43,6 @@ demo()
 
 # Calculate Big O:
 # loop => O(n)
-# check element in different_list => O(m)
-# append => O(1)
-# total = O(n * m + 1)
-# O(n^2)
+# add element into set => O(1)
+# total = O(n * 1)
+# O(n)

@@ -46,24 +46,29 @@ The percentage should have 2 decimal digits
 
 
 # part A
-def lis_of_codes_from_bangalore(call_list):
-    list_of_codes = []
+def get_set_of_area_codes(number):
+    if number.startswith("(") and number.split("(")[1].split(")")[0]:
+        return number.split("(")[1].split(")")[0]
+    elif len(number.split(" ")) == 2 and number[0] in ["7", "8", "9"]:
+        return number.split(" ")[0]
+    else:
+        return "140"
+
+
+def get_receiver_area_codes_from_bangalore(call_list):
+    receiver_area_codes_from_bangalore = set()
     for call in call_list:
-        for i in range(2):
-            if call[0].startswith("(080)"):
-                if call[1].startswith("(") and call[1].split("(")[1].split(")")[0] not in list_of_codes:
-                    area_codes = call[1].split("(")[1].split(")")[0]
-                    list_of_codes.append(area_codes)
-                elif len(call[1].split(" ")) == 2 and call[1][0] in ["7", "8", "9"] and call[1].split(" ")[0] not in list_of_codes:
-                    mobile_prefix = call[1].split(" ")[0]
-                    list_of_codes.append(mobile_prefix)
-                else:
-                    continue
-    return list_of_codes
+        caller_number = get_set_of_area_codes(call[0])
+        if caller_number == "080":
+            receiver_number = get_set_of_area_codes(call[1])
+            if receiver_number != "140":
+                receiver_area_codes_from_bangalore.add(receiver_number)
+
+    return receiver_area_codes_from_bangalore
 
 
 def demo_part_a():
-    list_of_codes = sorted(lis_of_codes_from_bangalore(calls))
+    list_of_codes = sorted(get_receiver_area_codes_from_bangalore(calls))
     print("The numbers called by people in Bangalore have codes:")
     for code in list_of_codes:
         print(code)
@@ -78,21 +83,24 @@ def percentage_of_calls_from_fixed_lines_in_bangalore(call_list):
     calls_from_fixed_lines_in_bangalore = []
     calls_from_fixed_lines_in_bangalore_to_fixed_line_in_bangalore = []
     for call in call_list:
-        for i in range(2):
-            if call[0].startswith("(080)"):
-                calls_from_fixed_lines_in_bangalore.append(call[0])
-                if call[1].startswith("(080)"):
-                    calls_from_fixed_lines_in_bangalore_to_fixed_line_in_bangalore.append(call[1])
+        caller_number = get_set_of_area_codes(call[0])
+        if caller_number == "080":
+            calls_from_fixed_lines_in_bangalore.append(caller_number)
+            receiver_number = get_set_of_area_codes(call[1])
+            if receiver_number == "080":
+                calls_from_fixed_lines_in_bangalore_to_fixed_line_in_bangalore.append(call[1])
 
-    return calls_from_fixed_lines_in_bangalore, calls_from_fixed_lines_in_bangalore_to_fixed_line_in_bangalore
+    list_a = calls_from_fixed_lines_in_bangalore
+    list_b = calls_from_fixed_lines_in_bangalore_to_fixed_line_in_bangalore
+    if len(list_a) == 0 or len(list_b) == 0:
+        percentage = 0
+    else:
+        percentage = round(len(list_b) / len(list_a) * 100, 2)
+    return percentage
 
 
 def demo_part_b():
-    a, b = percentage_of_calls_from_fixed_lines_in_bangalore(calls)
-    if len(a) == 0 or len(b) == 0:
-        percentage = 0
-    else:
-        percentage = round(len(b) / len(a) * 100, 2)
+    percentage = percentage_of_calls_from_fixed_lines_in_bangalore(calls)
     print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(
         percentage))
 
@@ -102,13 +110,12 @@ demo_part_b()
 
 # Calculate Big O:
 # part A:
-# lis_of_codes_from_bangalore() => O(n * 2 * m + 1)
-# print list_of_codes => O(m)
-# total: O(2 * n * m + m + 1)
-# O(k * n^2)
+# get_receiver_area_codes_from_bangalore() => O(n^2)
+# sorted: O(n * log n * n^2)
+# O(n^3 * log n)
 
 # part B:
-# percentage_of_calls_from_fixed_lines_in_bangalore() => O(2 * n + 1)
+# percentage_of_calls_from_fixed_lines_in_bangalore() => O(n^2)
 # calculate percentage: O(1)
-# total: O(2 * n + 2)
-# O(k * n)
+# total: O(n^2 + 1)
+# O(n^2)

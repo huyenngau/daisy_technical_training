@@ -3,6 +3,7 @@ Read file into texts and calls.
 It's ok if you don't understand how to read files
 """
 import csv
+from collections import defaultdict
 
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -23,26 +24,22 @@ September 2016.".
 
 
 # get total spend time for each telephone number and
-# save it into a dict with format: {key: telephone_number, value: total_time}
+# save it into a defaultdict with format: {key: telephone_number, value: total_time}
 def total_time_on_each_telephone_number(call_list):
-    total_time_dict = {}
+    total_time_defaultdict = defaultdict(int)
     for call in call_list:
         for i in range(2):
-            if call[i] not in total_time_dict:
-                total_time_dict[call[i]] = int(call[3])
-            else:
-                total_time_dict[call[i]] += int(call[3])
-
-    return total_time_dict
+            total_time_defaultdict[call[i]] += int(call[3])
+    return total_time_defaultdict
 
 
 def telephone_number_with_longest_time(call_list):
     longest_time = 0
     telephone_number = None
-    total_time_list = total_time_on_each_telephone_number(call_list)
-    for key in total_time_list:
-        if total_time_list[key] > longest_time:
-            longest_time = total_time_list[key]
+    total_time_defaultdict = total_time_on_each_telephone_number(call_list)
+    for key, value in total_time_defaultdict.items():
+        longest_time = max(value, longest_time)
+        if longest_time == value:
             telephone_number = key
     return longest_time, telephone_number
 
@@ -55,10 +52,9 @@ def demo():
 
 demo()
 
-
 # Calculate Big O:
-# total_time_on_each_telephone_number(call_list) => O(n * 2 * m + 1)
-# for key in total_time_list => O(m)
-# compare and assign: O(1)
-# total: O(2 * n * m + m + 1)
-# O(k * n^2)
+# total_time_on_each_telephone_number(call_list) => O(n * 2 + 1)
+# for key, value in total_time_defaultdict.items() => O(n)
+# compare and assign: O(n)
+# total: O(2 * n + n * n + 1)
+# O(n^2)
