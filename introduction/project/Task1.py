@@ -40,3 +40,11 @@ def demo():
 
 
 demo()
+
+
+# Calculate Big O:
+# loop => O(n)
+# check element in different_list => O(m)
+# append => O(1)
+# total = O(n * m + 1)
+# O(n^2)

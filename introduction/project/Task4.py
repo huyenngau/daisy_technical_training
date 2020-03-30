@@ -69,3 +69,15 @@ def demo():
 
 
 demo()
+
+
+# Calculate Big O:
+# call_numbers() => O(n * (a + b) + 1)
+# text_numbers() => O(n * (c + d) + 1)
+# for telephone_number in incoming_call_numbers => O (a)
+# check telephone_number => O(b + c + d + k)
+# append => O(1)
+# print => O (k)
+# total: O(n * (a + b + c + d) + a * (b + c + d + k) + k + 1)
+# O(n * m + q * p + k)
+

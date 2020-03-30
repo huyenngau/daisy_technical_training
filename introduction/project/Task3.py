@@ -100,4 +100,15 @@ def demo_part_b():
 print(" --- Part B ---")
 demo_part_b()
 
+# Calculate Big O:
+# part A:
+# lis_of_codes_from_bangalore() => O(n * 2 * m + 1)
+# print list_of_codes => O(m)
+# total: O(2 * n * m + m + 1)
+# O(k * n^2)
 
+# part B:
+# percentage_of_calls_from_fixed_lines_in_bangalore() => O(2 * n + 1)
+# calculate percentage: O(1)
+# total: O(2 * n + 2)
+# O(k * n)

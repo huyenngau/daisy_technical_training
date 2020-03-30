@@ -54,3 +54,11 @@ def demo():
 
 
 demo()
+
+
+# Calculate Big O:
+# total_time_on_each_telephone_number(call_list) => O(n * 2 * m + 1)
+# for key in total_time_list => O(m)
+# compare and assign: O(1)
+# total: O(2 * n * m + m + 1)
+# O(k * n^2)
