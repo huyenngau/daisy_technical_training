@@ -46,8 +46,8 @@ The percentage should have 2 decimal digits
 
 
 # part A
-def get_set_of_area_codes(number):
-    if number.startswith("(") and number.split("(")[1].split(")")[0]:
+def get_area_codes(number):
+    if number.startswith("("):
         return number.split("(")[1].split(")")[0]
     elif len(number.split(" ")) == 2 and number[0] in ["7", "8", "9"]:
         return number.split(" ")[0]
@@ -58,9 +58,9 @@ def get_set_of_area_codes(number):
 def get_receiver_area_codes_from_bangalore(call_list):
     receiver_area_codes_from_bangalore = set()
     for call in call_list:
-        caller_number = get_set_of_area_codes(call[0])
+        caller_number = get_area_codes(call[0])
         if caller_number == "080":
-            receiver_number = get_set_of_area_codes(call[1])
+            receiver_number = get_area_codes(call[1])
             if receiver_number != "140":
                 receiver_area_codes_from_bangalore.add(receiver_number)
 
@@ -83,19 +83,19 @@ def percentage_of_calls_from_fixed_lines_in_bangalore(call_list):
     calls_from_fixed_lines_in_bangalore = []
     calls_from_fixed_lines_in_bangalore_to_fixed_line_in_bangalore = []
     for call in call_list:
-        caller_number = get_set_of_area_codes(call[0])
+        caller_number = get_area_codes(call[0])
         if caller_number == "080":
             calls_from_fixed_lines_in_bangalore.append(caller_number)
-            receiver_number = get_set_of_area_codes(call[1])
+            receiver_number = get_area_codes(call[1])
             if receiver_number == "080":
                 calls_from_fixed_lines_in_bangalore_to_fixed_line_in_bangalore.append(call[1])
 
-    list_a = calls_from_fixed_lines_in_bangalore
-    list_b = calls_from_fixed_lines_in_bangalore_to_fixed_line_in_bangalore
-    if len(list_a) == 0 or len(list_b) == 0:
+    a = len(calls_from_fixed_lines_in_bangalore)
+    b = len(calls_from_fixed_lines_in_bangalore_to_fixed_line_in_bangalore)
+    if a == 0 or b == 0:
         percentage = 0
     else:
-        percentage = round(len(list_b) / len(list_a) * 100, 2)
+        percentage = round(b / a * 100, 2)
     return percentage
 
 
@@ -110,12 +110,14 @@ demo_part_b()
 
 # Calculate Big O:
 # part A:
-# get_receiver_area_codes_from_bangalore() => O(n^2)
-# sorted: O(n * log n * n^2)
-# O(n^3 * log n)
+# get_receiver_area_codes_from_bangalore() has 1 loop => O(n)
+# sorted: O(n * log(n))
+# loop to print code: O(n)
+# total: O(n + n * log (n) + n)
+# O(n * log (n))
 
 # part B:
-# percentage_of_calls_from_fixed_lines_in_bangalore() => O(n^2)
+# percentage_of_calls_from_fixed_lines_in_bangalore() has 1 loop => O(n)
 # calculate percentage: O(1)
-# total: O(n^2 + 1)
-# O(n^2)
+# total: O(n + 1)
+# O(n)

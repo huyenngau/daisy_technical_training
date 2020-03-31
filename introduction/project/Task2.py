@@ -25,36 +25,31 @@ September 2016.".
 
 # get total spend time for each telephone number and
 # save it into a defaultdict with format: {key: telephone_number, value: total_time}
-def total_time_on_each_telephone_number(call_list):
-    total_time_defaultdict = defaultdict(int)
+def get_total_time_on_each_telephone_number(call_list):
+    total_time_on_each_telephone_number = defaultdict(int)
     for call in call_list:
         for i in range(2):
-            total_time_defaultdict[call[i]] += int(call[3])
-    return total_time_defaultdict
+            total_time_on_each_telephone_number[call[i]] += int(call[3])
+    return total_time_on_each_telephone_number
 
 
 def telephone_number_with_longest_time(call_list):
-    longest_time = 0
-    telephone_number = None
-    total_time_defaultdict = total_time_on_each_telephone_number(call_list)
-    for key, value in total_time_defaultdict.items():
-        longest_time = max(value, longest_time)
-        if longest_time == value:
-            telephone_number = key
-    return longest_time, telephone_number
+    total_time_on_each_telephone_number = get_total_time_on_each_telephone_number(call_list)
+
+    telephone_number, longest_time = max(total_time_on_each_telephone_number.items(), key=lambda x: x[1])
+    return telephone_number, longest_time
 
 
 def demo():
-    total_longest_time, telephone_number = telephone_number_with_longest_time(calls)
+    telephone_number, longest_time = telephone_number_with_longest_time(calls)
     print("{} spent the longest time, {} seconds, on the phone during September 2016.".format(telephone_number,
-                                                                                              total_longest_time))
+                                                                                              longest_time))
 
 
 demo()
 
 # Calculate Big O:
-# total_time_on_each_telephone_number(call_list) => O(n * 2 + 1)
-# for key, value in total_time_defaultdict.items() => O(n)
-# compare and assign: O(n)
-# total: O(2 * n + n * n + 1)
-# O(n^2)
+# get_total_time_on_each_telephone_number(call_list) => O(n * 2 + 1)
+# max(): O(n)
+# total: O(2 * n + n + 1)
+# O(n)

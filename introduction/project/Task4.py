@@ -27,33 +27,33 @@ The list of numbers should be print out one per line in lexicographic order with
 
 
 def call_numbers(call_list):
-    set_of_caller_numbers = set()
-    set_of_receiver_numbers = set()
+    caller_numbers = set()
+    receiver_numbers = set()
     for call in call_list:
-        set_of_caller_numbers.add(call[0])
-        set_of_receiver_numbers.add(call[1])
-    return set_of_caller_numbers, set_of_receiver_numbers
+        caller_numbers.add(call[0])
+        receiver_numbers.add(call[1])
+    return caller_numbers, receiver_numbers
 
 
 def text_numbers(text_list):
-    set_of_sender_text_numbers = set()
-    set_of_receiver_text_numbers = set()
+    sender_text_numbers = set()
+    receiver_text_numbers = set()
     for text in text_list:
-        set_of_sender_text_numbers.add(text[0])
-        set_of_receiver_text_numbers.add(text[1])
-    return set_of_sender_text_numbers, set_of_receiver_text_numbers
+        sender_text_numbers.add(text[0])
+        receiver_text_numbers.add(text[1])
+    return sender_text_numbers, receiver_text_numbers
 
 
 def get_telemarketer_numbers(call_list, text_list):
     telemarketer_numbers = set()
 
-    set_of_caller_numbers, set_of_receiver_numbers = call_numbers(call_list)
-    set_of_sender_text_numbers, set_of_receiver_text_numbers = text_numbers(text_list)
+    caller_numbers, receiver_numbers = call_numbers(call_list)
+    sender_text_numbers, receiver_text_numbers = text_numbers(text_list)
 
-    for telephone_number in set_of_caller_numbers:
-        if telephone_number not in set_of_receiver_numbers \
-           and telephone_number not in set_of_sender_text_numbers \
-           and telephone_number not in set_of_receiver_text_numbers:
+    for telephone_number in caller_numbers:
+        if telephone_number not in receiver_numbers \
+           and telephone_number not in sender_text_numbers \
+           and telephone_number not in receiver_text_numbers:
             telemarketer_numbers.add(telephone_number)
 
     return telemarketer_numbers
@@ -64,6 +64,7 @@ def demo():
     print("These numbers could be telemarketers:")
     for telephone_number in telemarketer_numbers:
         print(telephone_number)
+    print(len(telemarketer_numbers))
 
 
 demo()
@@ -74,6 +75,7 @@ demo()
 # for telephone_number in set_of_caller_numbers => O (n)
 # check telephone_number is in telemarketer_numbers => O(n)
 # add => O(1)
-# sorted => O(n * log n)
+# sorted => O(n * log(n))
 # print => O(n)
-# total: O(n * (n^2 + n * log n + 1))
+# total: O(n + n + n * n + 1 + n * log(n) + n)
+# O(n^2)

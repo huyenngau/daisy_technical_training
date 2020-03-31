@@ -19,11 +19,11 @@ Print a message:
 """
 
 
-def different_numbers(list_of_numbers):
-    set_of_different_numbers = set()
+def get_total_different_numbers(list_of_numbers):
+    different_numbers = set()
     for element in list_of_numbers:
-        set_of_different_numbers.add(element)
-    return len(set_of_different_numbers)
+        different_numbers.add(element)
+    return len(different_numbers)
 
 
 def demo():
@@ -34,8 +34,8 @@ def demo():
     for text in texts:
         total_telephone_numbers.append(text[0])
         total_telephone_numbers.append(text[1])
-    list_of_different_telephone_numbers = different_numbers(total_telephone_numbers)
-    print("There are {} different telephone numbers in the records.".format(list_of_different_telephone_numbers))
+    total_different_telephone_numbers = get_total_different_numbers(total_telephone_numbers)
+    print("There are {} different telephone numbers in the records.".format(total_different_telephone_numbers))
 
 
 demo()
