@@ -36,8 +36,8 @@ class LinkedList:
         while node:
             if node.value == value:
                 return node
-            else:
-                node = node.next
+            node = node.next
+
         raise ValueError("Value not found in the list.")
 
     def remove(self, value):
@@ -63,9 +63,9 @@ class LinkedList:
         if self.head is None:
             return
 
-        node = self.head
+        popped_node = self.head.value
         self.head = self.head.next
-        return node.value
+        return popped_node
 
     def insert(self, value, pos):
         """ Insert value at pos position in the list. If pos is larger than the
@@ -76,8 +76,8 @@ class LinkedList:
 
         index = 0
         node = self.head
-        while node.next and index <= pos:
-            if (pos - 1) == index:
+        while node.next:
+            if index == (pos - 1):
                 new_node = Node(value)
                 new_node.next = node.next
                 node.next = new_node
@@ -85,17 +85,19 @@ class LinkedList:
 
             index += 1
             node = node.next
-        else:
-            self.append(value)
+
+        self.append(value)
 
     def size(self):
         """ Return the size or length of the linked list. """
-        size = 0
+        if self.head is None:
+            return 0
+        size_llist = 0
         node = self.head
         while node:
-            size += 1
+            size_llist += 1
             node = node.next
-        return size
+        return size_llist
 
     def to_list(self):
         out = []
@@ -106,7 +108,8 @@ class LinkedList:
         return out
 
 
-# Test your implementation here
+# # Test your implementation here
+
 # Test prepend
 linked_list = LinkedList()
 linked_list.prepend(1)
