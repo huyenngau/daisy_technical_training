@@ -8,6 +8,7 @@ def list_without_duplicate_1(input_list):
 
 
 # Using set
+# Only python 3.6+ support
 def list_without_duplicate_2(input_list):
     output = set()
     for element in input_list:
