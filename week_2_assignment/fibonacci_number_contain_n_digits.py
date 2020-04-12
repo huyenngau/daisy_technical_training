@@ -16,7 +16,7 @@ def index_of_first_fibonacci_number_contain_n_digits(number_of_digits):
         second_fibonacci_number = fibonacci_number
         index += 1
 
-        if fibonacci_number / (10**(number_of_digits-1)) > 1:
+        if fibonacci_number / (10 ** (number_of_digits - 1)) > 1:
             return index
 
 
