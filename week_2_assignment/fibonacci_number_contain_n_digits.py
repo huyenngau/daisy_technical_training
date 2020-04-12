@@ -10,7 +10,7 @@ def index_of_first_fibonacci_number_contain_n_digits(number_of_digits):
     index = 2
 
     while True:
-        fibonacci_number = first_fibonacci_number + second_fibonacci_number\
+        fibonacci_number = first_fibonacci_number + second_fibonacci_number
 
         first_fibonacci_number = second_fibonacci_number
         second_fibonacci_number = fibonacci_number
