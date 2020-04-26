@@ -78,7 +78,7 @@ our_cache.put(4, 4)
 
 
 print(our_cache.get(1))  # returns 1
-print(our_cache.get(2))  # returns 2
+print(our_cache.get(2))  # returns 8
 print(our_cache.get(9))  # returns -1 because 9 is not present in the cache
 
 our_cache.put(5, 5)
