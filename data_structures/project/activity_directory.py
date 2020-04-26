@@ -36,7 +36,7 @@ def is_user_in_group(user, group):
     return False
 
 
-# Test case
+# Test cases
 parent = Group("parent")
 child = Group("child")
 sub_child = Group("subchild")
@@ -51,4 +51,5 @@ parent.add_group(child)
 
 
 print(is_user_in_group("sub_child_user", parent))  # return True
+print(is_user_in_group("sub_child_user", sub_child))  # return True
 print(is_user_in_group("sub_child_user", sub_child2))  # return False

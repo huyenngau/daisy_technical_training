@@ -91,34 +91,42 @@ def intersection(llist_1, llist_2):
     return intersection_llist
 
 
-# Test case 1
-linked_list_1 = LinkedList()
-linked_list_2 = LinkedList()
+def test_function(arr_1, arr_2):
+    linked_list_1 = LinkedList()
+    linked_list_2 = LinkedList()
 
+    for i in element_1:
+        linked_list_1.append(i)
+
+    for i in element_2:
+        linked_list_2.append(i)
+
+    print(union(linked_list_1, linked_list_2))
+    print(intersection(linked_list_1, linked_list_2))
+
+
+# Test case 1
+print("-------------------------------------------------------------------")
 element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 21]
 element_2 = [6, 32, 4, 9, 6, 1, 11, 21, 1]
-
-for i in element_1:
-    linked_list_1.append(i)
-
-for i in element_2:
-    linked_list_2.append(i)
-
-print(union(linked_list_1, linked_list_2))
-print(intersection(linked_list_1, linked_list_2))
+# union: 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 -> 1 ->
+# intersection: 4 -> 6 -> 21 ->
+test_function(element_1, element_2)
+print("-------------------------------------------------------------------")
 
 # Test case 2
-linked_list_3 = LinkedList()
-linked_list_4 = LinkedList()
+element_3 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
+element_4 = [1, 7, 8, 9, 11, 21, 1]
+# union: 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 -> 1 ->
+# intersection: 4 -> 6 -> 21 ->
+test_function(element_3, element_4)
+print("-------------------------------------------------------------------")
 
-element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
-element_2 = [1, 7, 8, 9, 11, 21, 1]
+# Test case 3
+element_3 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
+element_4 = [1, 7, 8, 9, 11, 21, 1]
+# union: 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 -> 1 ->
+# intersection: 4 -> 6 -> 21 ->
+test_function(element_3, element_4)
+print("-------------------------------------------------------------------")
 
-for i in element_1:
-    linked_list_3.append(i)
-
-for i in element_2:
-    linked_list_4.append(i)
-
-print(union(linked_list_3, linked_list_4))
-print(intersection(linked_list_3, linked_list_4))

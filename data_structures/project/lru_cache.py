@@ -1,12 +1,3 @@
-"""
-We'll set up our linked list with the most-recently used item at the head of the list
-and the least-recently used item at the tail.
-In general, finding an item in a linked list is O(n) time, since we need to walk the whole list.
-We use a hash map that maps items to linked list nodes.
-That lets us find an element in our cache's linked list in O(1)O(1) time, instead of O(n).
-"""
-
-
 class DoubleNode:
     def __init__(self, key, value):
         self.key = key
@@ -76,7 +67,7 @@ class LRU_Cache(object):
                     self.add_to_head(new_node)
 
 
-# Test case
+# Test cases
 our_cache = LRU_Cache(5)
 
 our_cache.put(1, 1)

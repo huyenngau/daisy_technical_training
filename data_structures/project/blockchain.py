@@ -47,7 +47,7 @@ class BlockChain:
         node.next = block
 
 
-# Test case
+# Test cases
 blockchain = BlockChain()
 block1 = blockchain.create_new_block("abc", None)
 block2 = blockchain.create_new_block("def", block1)
