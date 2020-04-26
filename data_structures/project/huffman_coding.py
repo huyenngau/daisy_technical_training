@@ -4,32 +4,32 @@ from collections import defaultdict
 
 
 class HeapNode:
-    def __init__(self, char, freq):
+    def __init__(self, char, frequency):
         self.char = char
-        self.freq = freq
+        self.frequency = frequency
         self.left = None
         self.right = None
 
-    # Compare 2 HeapNode by freq
+    # Compare 2 HeapNode by frequency
     def __lt__(self, other):
         if not isinstance(other, HeapNode):
             raise TypeError(f"'<' not supported between instances of {type(self)} and {type(other)}")
-        return self.freq < other.freq
+        return self.frequency < other.frequency
 
 
 class Huffman:
     # Build a tree
     # Merge 2 minimum nodes in Heap until the heap contains only one node
     def build_a_huffman_tree(self, input_str):
-        # Make char_freq dict
-        frequency = defaultdict(int)
+        # Make char_frequency dict
+        frequencies = defaultdict(int)
         for char in input_str:
-            frequency[char] += 1
+            frequencies[char] += 1
 
-        # Add items in frequency into Heap
+        # Add items in frequencies into Heap
         heap = []
-        for key, value in frequency.items():
-            node = HeapNode(key, value)
+        for char, frequency in frequencies.items():
+            node = HeapNode(char, frequency)
             heapq.heappush(heap, node)  # Push the value item onto the heap, maintaining the heap invariant
 
         while len(heap) > 1:
@@ -38,8 +38,8 @@ class Huffman:
             node1 = heapq.heappop(heap)
             node2 = heapq.heappop(heap)
 
-            # Create a new internal node with a frequency equal to the sum of the two nodes frequencies
-            merged_node = HeapNode(None, node1.freq + node2.freq)
+            # Create a new internal node with a frequencies equal to the sum of the two nodes frequencies
+            merged_node = HeapNode(None, node1.frequency + node2.frequency)
             # Make the first extracted node as its left child and the other extracted node as its right child
             merged_node.left = node1
             merged_node.right = node2
@@ -53,7 +53,7 @@ class Huffman:
         return huffman_tree
 
     def trim_huffman_tree(self, tree):
-        tree.freq = None
+        tree.frequency = None
         if tree.left:
             self.trim_huffman_tree(tree.left)
         if tree.right:
@@ -116,7 +116,6 @@ if __name__ == "__main__":
     codes = {}
 
     a_great_sentence = "The bird is the word"
-    # a_great_sentence = "Hello"
 
     print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
     print("The content of the data is: {}\n".format(a_great_sentence))
