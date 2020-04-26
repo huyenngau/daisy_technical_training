@@ -17,18 +17,18 @@ def find_files(suffix, path):
     Returns:
        a list of paths
     """
-    list_of_files = os.listdir(path)
-    list_of_paths = list()
+    all_files = os.listdir(path)
+    all_paths = list()
 
-    for f in list_of_files:
+    for f in all_files:
         new_path = os.path.join(path, f)
         if os.path.isdir(new_path):
-            list_of_paths += find_files(suffix, new_path)
+            all_paths += find_files(suffix, new_path)
         else:
             if new_path.endswith(suffix):
-                list_of_paths.append(new_path)
+                all_paths.append(new_path)
 
-    return list_of_paths
+    return all_paths
 
 
 # Test case
