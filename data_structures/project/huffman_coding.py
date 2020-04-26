@@ -1,5 +1,6 @@
 import heapq
 import sys
+from collections import defaultdict
 
 
 class HeapNode:
@@ -11,38 +12,31 @@ class HeapNode:
 
     # Compare 2 HeapNode by freq
     def __lt__(self, other):
-        if other is None:
-            return -1
         if not isinstance(other, HeapNode):
-            return -1
+            raise TypeError(f"'<' not supported between instances of {type(self)} and {type(other)}")
         return self.freq < other.freq
 
 
 class Huffman:
-    def __init__(self):
-        self.heap = []
-
     # Build a tree
     # Merge 2 minimum nodes in Heap until the heap contains only one node
     def build_a_huffman_tree(self, input_str):
         # Make char_freq dict
-        frequency = {}
+        frequency = defaultdict(int)
         for char in input_str:
-            if char in frequency:
-                frequency[char] += 1
-            else:
-                frequency[char] = 1
+            frequency[char] += 1
 
         # Add items in frequency into Heap
-        for key in frequency:
-            node = HeapNode(key, frequency[key])
-            heapq.heappush(self.heap, node)  # Push the value item onto the heap, maintaining the heap invariant
+        heap = []
+        for key, value in frequency.items():
+            node = HeapNode(key, value)
+            heapq.heappush(heap, node)  # Push the value item onto the heap, maintaining the heap invariant
 
-        while len(self.heap) > 1:
+        while len(heap) > 1:
             # Get 2 minimum nodes from Heap
             # Using heappop to pop and return the smallest item from the heap, maintaining the heap invariant
-            node1 = heapq.heappop(self.heap)
-            node2 = heapq.heappop(self.heap)
+            node1 = heapq.heappop(heap)
+            node2 = heapq.heappop(heap)
 
             # Create a new internal node with a frequency equal to the sum of the two nodes frequencies
             merged_node = HeapNode(None, node1.freq + node2.freq)
@@ -51,9 +45,9 @@ class Huffman:
             merged_node.right = node2
 
             # Add this node to the min heap
-            heapq.heappush(self.heap, merged_node)
+            heapq.heappush(heap, merged_node)
 
-        huffman_tree = heapq.heappop(self.heap)
+        huffman_tree = heapq.heappop(heap)
         # remove the frequencies from the previously built tree
         self.trim_huffman_tree(huffman_tree)
         return huffman_tree
@@ -93,7 +87,7 @@ class Huffman:
         current_node = huffman_tree
         for bit in encoded_data:
             # If current bit is 0, move to left node of the tree
-            if int(bit) == 0:
+            if bit == "0":
                 current_node = current_node.left
             # If the bit is 1, move to right node of the tree
             else:
