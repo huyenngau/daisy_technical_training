@@ -56,6 +56,7 @@ class LinkedList:
 
 def union(llist_1, llist_2):
     llist_1.remove_duplicates()
+    llist_2.remove_duplicates()
 
     union_llist = LinkedList()
 
@@ -74,10 +75,7 @@ def union(llist_1, llist_2):
 
 
 def intersection(llist_1, llist_2):
-    llist_1.remove_duplicates()
-
     intersection_llist = LinkedList()
-
     node_1 = llist_1.head
     while node_1:
         if llist_2.search(node_1.value) is not None:
@@ -85,9 +83,8 @@ def intersection(llist_1, llist_2):
         node_1 = node_1.next
 
     if intersection_llist.head is None:
-        raise Exception("Can not get interaction from 2 linked lists")
+        return None
 
-    intersection_llist.remove_duplicates()
     return intersection_llist
 
 
@@ -95,10 +92,10 @@ def test_function(arr_1, arr_2):
     linked_list_1 = LinkedList()
     linked_list_2 = LinkedList()
 
-    for i in element_1:
+    for i in arr_1:
         linked_list_1.append(i)
 
-    for i in element_2:
+    for i in arr_2:
         linked_list_2.append(i)
 
     print(union(linked_list_1, linked_list_2))
@@ -109,7 +106,7 @@ def test_function(arr_1, arr_2):
 print("-------------------------------------------------------------------")
 element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 21]
 element_2 = [6, 32, 4, 9, 6, 1, 11, 21, 1]
-# union: 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 -> 1 ->
+# union: 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 ->
 # intersection: 4 -> 6 -> 21 ->
 test_function(element_1, element_2)
 print("-------------------------------------------------------------------")
@@ -117,16 +114,16 @@ print("-------------------------------------------------------------------")
 # Test case 2
 element_3 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
 element_4 = [1, 7, 8, 9, 11, 21, 1]
-# union: 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 -> 1 ->
-# intersection: 4 -> 6 -> 21 ->
+# union: 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 23 -> 1 -> 7 -> 8 -> 9 -> 11 -> 21 ->
+# intersection: None
 test_function(element_3, element_4)
 print("-------------------------------------------------------------------")
 
 # Test case 3
-element_3 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
-element_4 = [1, 7, 8, 9, 11, 21, 1]
-# union: 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 -> 1 ->
-# intersection: 4 -> 6 -> 21 ->
-test_function(element_3, element_4)
+element_5 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
+element_6 = [1, 7, 8, 9, 11, 21, 1]
+# union: 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 23 -> 1 -> 7 -> 8 -> 9 -> 11 -> 21 ->
+# intersection: None
+test_function(element_5, element_6)
 print("-------------------------------------------------------------------")
 
