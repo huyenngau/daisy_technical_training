@@ -13,4 +13,3 @@ This solution makes The number of digits in both the numbers cannot differ by mo
      Total: O(n log n)
  
 - Space Complexity: O(1).
-Constant extra space is needed.

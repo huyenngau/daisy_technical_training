@@ -4,4 +4,3 @@ Expected time complexity is O(log n)
 - Time complexity: O(log n).
 The time complexity of binary search is O(log n).
 - Space Complexity: O(1).
-Constant extra space is needed.
