@@ -3,7 +3,7 @@ import random
 
 def get_min_max(ints):
     """
-    Return min and max out of list of unsorted integers.
+    Return a tuple(min, max) out of list of unsorted integers.
 
     Args:
        ints(list): list of integers containing one or more integers
@@ -15,7 +15,8 @@ def get_min_max(ints):
         if x > max_number:
             max_number = x
 
-    return min_number, max_number
+    min_max = (min_number, max_number)
+    return min_max
 
 
 # Test cases
