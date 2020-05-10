@@ -3,11 +3,12 @@ def heapify(arr, n, i):
         :param: arr - array to heapify
         n -- number of elements in the array
         i -- index of the current node
-    TODO: Converts an array (in place) into a maxheap, a complete binary tree with the largest values at the top
+    Converts an array (in place) into a maxheap,
+    a complete binary tree with the largest values at the top
     """
 
     # Using i as the index of the current node, find the 2 child nodes (if the array were a binary tree)
-    # and find the largest value.   If one of the children is larger swap the values and recurse into that subree
+    # and find the largest value.   If one of the children is larger swap the values and recurse into that subtree
 
     # consider current index as largest
     largest_index = i
