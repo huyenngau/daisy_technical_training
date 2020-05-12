@@ -18,15 +18,10 @@ def rotated_array_search(input_list, start_index, end_index, target_number):
     if middle_value == target_number:
         return middle_index
 
-    elif input_list[start_index] <= middle_value:
-        if input_list[start_index] <= target_number <= middle_value:
-            return rotated_array_search(input_list, start_index, middle_index - 1, target_number)
-        return rotated_array_search(input_list, middle_index + 1, end_index, target_number)
-
-    else:
-        if middle_value <= target_number <= input_list[end_index]:
-            return rotated_array_search(input_list, middle_index + 1, end_index, target_number)
+    if input_list[start_index] <= target_number <= middle_value or \
+       target_number <= middle_value <= input_list[end_index]:
         return rotated_array_search(input_list, start_index, middle_index - 1, target_number)
+    return rotated_array_search(input_list, middle_index + 1, end_index, target_number)
 
 
 def linear_search(input_list, number):
