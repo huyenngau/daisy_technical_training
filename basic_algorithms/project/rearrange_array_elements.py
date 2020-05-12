@@ -46,13 +46,14 @@ def rearrange_digits(input_list):
 
     # The first number is filled with digits at the even indices of the sorted input list
     x = 0
-    for i in range(0, n, 2):
-        x = x * 10 + sorted_input_list[i]
+    for i in sorted_input_list[slice(0, n, 2)]:
+        print(i)
+        x = x * 10 + i
 
     # The second number is filled with digits at the odd indices of the sorted input list
     y = 0
-    for k in range(1, n, 2):
-        y = y * 10 + sorted_input_list[k]
+    for k in sorted_input_list[slice(1, n, 2)]:
+        y = y * 10 + k
 
     return x, y
 
