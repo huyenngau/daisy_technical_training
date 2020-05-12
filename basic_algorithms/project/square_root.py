@@ -13,9 +13,9 @@ def sqrt(number):
     start = 1
     end = number
     while start <= end:
-        mid = (start + end)//2
+        mid = (start + end) // 2
 
-        if mid**2 <= number:
+        if mid ** 2 <= number:
             return mid
         else:
             end = end - 1

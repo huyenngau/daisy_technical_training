@@ -12,7 +12,7 @@ def rotated_array_search(input_list, start_index, end_index, target_number):
     if start_index > end_index:
         return -1
 
-    middle_index = (start_index + end_index)//2
+    middle_index = (start_index + end_index) // 2
     middle_value = input_list[middle_index]
 
     if middle_value == target_number:

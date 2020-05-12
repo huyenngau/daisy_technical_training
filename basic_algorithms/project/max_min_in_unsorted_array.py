@@ -27,6 +27,5 @@ print("Pass" if ((0, 9) == get_min_max(test_case_1)) else "Fail")
 test_case_2 = [23, 1, 22, 2, 23, 0, 1, 0]
 print("Pass" if ((0, 23) == get_min_max(test_case_2)) else "Fail")
 
-
 test_case_3 = [0]
 print("Pass" if ((0, 0) == get_min_max(test_case_3)) else "Fail")
