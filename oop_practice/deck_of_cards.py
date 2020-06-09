@@ -9,13 +9,11 @@ class Card:
 
 
 class Deck:
+    suits = ("Hearts", "Diamonds", "Clubs", "Spades")
+    values = ("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K")
+
     def __init__(self):
-        suits = ("Hearts", "Diamonds", "Clubs", "Spades")
-        values = ("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K")
         self.cards = []
-        for suit in suits:
-            for value in values:
-                self.cards.append(Card(suit, value))
 
     def __str__(self):
         for card in self.cards:
@@ -23,6 +21,11 @@ class Deck:
         return "Cards remaining in deck: {}".format(len(self.cards))
 
     def shuffle(self):
+        self.cards = []
+        for suit in self.suits:
+            for value in self.values:
+                self.cards.append(Card(suit, value))
+
         if len(self.cards) < 52:
             raise Exception("Only deck full 52 cards can be shuffled!")
         random.shuffle(self.cards)
@@ -44,4 +47,4 @@ print("-----------------------------------")
 print(f"Deal card: {deal_card.suit} {deal_card.value}")
 print(deck)
 
-deck.shuffle()
+deck.shuffle()    
