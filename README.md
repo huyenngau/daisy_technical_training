@@ -1,3 +1,5 @@
-# daisy_technical_training
+# technical_training
+
+QA Automation Engineer
 
 --- Got It .Inc ---
