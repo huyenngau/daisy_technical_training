@@ -1,4 +1,4 @@
-# technical_training
+# Technical training
 
 QA Automation Engineer
 
